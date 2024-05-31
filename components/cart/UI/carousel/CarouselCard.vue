@@ -21,9 +21,9 @@
         ₽
       </h2>
       <span class="price">
-        {{ product.price?.eu.min.toString() }}
+        {{ product.price?.eu.min }}
         -
-        {{ product.price?.eu.max.toString() }}
+        {{ product.price?.eu.max }}
         €
       </span>
       <more-btn class="more-btn"/>

@@ -6,7 +6,7 @@
       <p class="total-info-price">
         Сумма заказа
         <span>
-          {{ totalPrice.toString().replaceAll('.', ' ') }} ₽
+          {{ totalPrice }} ₽
         </span>
       </p>
 
@@ -30,7 +30,7 @@
       <p class="total__total-price__p">
         Стоимость товаров
         <span>
-          {{ totalPrice.toString().replaceAll('.', ' ') }} ₽
+          {{ totalPrice }} ₽
         </span>
       </p>
     </div>
@@ -38,11 +38,11 @@
     <div class="total__actions">
       <order-btn
         class="order-btn"
-        @click="useCartStore().buyToServer()"
+        @click="cartStore.buyToServer()"
       />
       <one-click-btn
         class="one-ckick-btn"
-        @click="useCartStore().buyToServer()"
+        @click="cartStore.buyToServer()"
       />
     </div>
   </div>

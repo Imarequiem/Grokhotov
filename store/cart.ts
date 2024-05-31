@@ -6,6 +6,8 @@ import type CartProduct from "~/components/cart/types/cart-product.interface"
 
 export const useCartStore = defineStore('cart', () => {
   const router = useRouter()
+
+  const url = "grokhotov.com"
   const cart: Ref<Cart> = ref({
     products: [
       {
@@ -48,10 +50,11 @@ export const useCartStore = defineStore('cart', () => {
     }
 
     let total = 0
+
     cart.value.products.forEach((product: CartProduct) => {
       total += product.targetPrice * product.count
     })
-    return total.toFixed(3)
+    return total.toFixed(3).toString().replaceAll('.', ' ')
   }
 
   const getCountProduct = () => {
@@ -68,10 +71,21 @@ export const useCartStore = defineStore('cart', () => {
     cart.value.products.splice(index, 1)
   }
 
-  const buyToServer = () => {
-    cart.value.products.length
-    ? router.push({ path: "/success-order" })
-    : alert('Чтобы что-нибудь купить, заполните корзину')
+  const buyToServer = async () => {
+    if(!cart.value.products.length) {
+      return alert('Чтобы что-нибудь купить, заполните корзину')
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(cart),
+    })
+
+    if(!response.ok) {
+      throw new Error(`Ошибка по адресу ${url}, статус ошибки: ${JSON.stringify(response)}`)
+    }
+
+    await router.push({ path: "/success-order" })
   }
 
   return { cart, getTotalPrice, getCountProduct, deleteProduct, buyToServer }

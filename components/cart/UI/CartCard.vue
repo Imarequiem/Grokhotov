@@ -22,7 +22,7 @@
         @minus="
           product.count > 1
           ? product.count -= 1
-          : useCartStore().deleteProduct(product)
+          : cartStore.deleteProduct(product)
         "
       />
       <span v-show="product.count > 1">{{ product.targetPrice.toString().replaceAll('.', ' ') }}₽/шт.</span>
@@ -31,6 +31,8 @@
     <div class="cart-card__price">
       {{ price.toString().replaceAll('.', ' ') + ' ₽'}}
     </div>
+
+    <button class="close-card" @click="cartStore.deleteProduct(product)">&#x2715</button>
   </div>
 </template>
 
@@ -46,6 +48,8 @@ import type CartProduct from '../types/cart-product.interface';
 const props = defineProps<{
   product: CartProduct
 }>();
+
+const cartStore = useCartStore()
 
 const price = computed(() => props.product.targetPrice * props.product.count)
 </script>
@@ -105,11 +109,21 @@ figure {
 }
 
 .cart-card__price {
+  text-align: right;
+  width: 90px;
   margin-right: 53px;
   font-family: 'Roboto-medium';
   font-size: 18px;
   font-weight: 500;
   line-height: 26.1px;
   color: var(--primary);
+}
+
+.close-card {
+  position: relative;
+  bottom: 45px;
+  right: 5px;
+  border: none;
+  background: transparent;
 }
 </style>
