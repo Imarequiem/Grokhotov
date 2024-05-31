@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Lato-regular";
+  src: url('/assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Lato-bold";
+  src: url('/assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Roboto-regular";
+  src: url('/assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Roboto-medium";
+  src: url('/assets/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Roboto-bold";
+  src: url('/assets/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+}
+
+:root {
+  --primary: #1F2432;
+  --secondary: #2C3242;
+  --secondary-grey: #797B86;
+  --background-grey: #F6F8FA;
+  --underline: #AEB0B6;
+  --btn-blue: #0069B4;
+}
+:root {
+  --lato:'Lato';
+  --roboto: 'Roboto';
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
