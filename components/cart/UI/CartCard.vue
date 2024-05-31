@@ -111,7 +111,6 @@ figure {
 .cart-card__price {
   text-align: right;
   width: 90px;
-  margin-right: 53px;
   font-family: 'Roboto-medium';
   font-size: 18px;
   font-weight: 500;
