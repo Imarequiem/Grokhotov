@@ -53,8 +53,8 @@ import { computed } from 'vue';
 
 import { useCartStore } from '~/store/cart';
 
-import OrderBtn from './buttons/OrderBtn.vue';
-import OneClickBtn from './buttons/OneClickBtn.vue';
+import OrderBtn from '../ui/buttons/OrderBtn.vue';
+import OneClickBtn from '../ui/buttons/OneClickBtn.vue';
 
 const cartStore = useCartStore()
 const cart = cartStore.cart

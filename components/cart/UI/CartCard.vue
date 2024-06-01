@@ -43,7 +43,7 @@ import { computed } from 'vue';
 
 import { useCartStore } from '~/store/cart';
 
-import CountBtns from './buttons/CountBtns.vue';
+import CountBtns from '../ui/buttons/CountBtns.vue';
 
 import fixedPrice from '../functions/fixedPrice';
 

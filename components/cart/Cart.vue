@@ -50,9 +50,9 @@ import { ref, type Ref } from 'vue';
 
 import { useCartStore } from '~/store/cart';
 
-import Total from '~/components/cart/UI/Total.vue';
-import Installation from './UI/Installation.vue';
-import CartCard from './UI/CartCard.vue';
+import Total from './ui/Total.vue';
+import Installation from './ui/Installation.vue';
+import CartCard from './ui/CartCard.vue';
 
 import type { Cart } from './types/cart.interface';
 
