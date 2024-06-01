@@ -1,17 +1,17 @@
 <template>
-  <header>
+  <header class="header">
     <h1>tesk task grokhotov</h1>
-    <div class="cart-icon">
+    <div class="header__cart-icon">
       <img
         src="/assets/img/cart-icon.svg"
         width="32px"
         height="32px"
       >
 
-      <div class="cart-icon__info">
+      <div class="header__cart-icon__info">
         <h2>Ваша корзина</h2>
-        <span>{{ count }} товара</span>
-        <p>{{ cartStore.getTotalPrice() }} ₽</p>
+        <span>{{ count + ' товара'}}</span>
+        <p>{{ cartStore.getTotalPrice() + ' ₽'}}</p>
       </div>
     </div>
   </header>
@@ -31,7 +31,7 @@ const count = computed(() => cartStore.getCountProduct())
 
 <style scoped lang="scss">
 header,
-.cart-icon {
+.header__cart-icon {
   display: flex;
   align-items: center;
 }
@@ -44,13 +44,13 @@ h1 {
   text-transform: uppercase;
   text-align: center;
 }
-.cart-icon {
+.header__cart-icon {
 
   img {
     display: inline-block;
     margin-right: 10px;
   }
-  .cart-icon__info {
+  .header__cart-icon__info {
     display: inline-flex;
     flex-direction: column;
     font-family: "Lato-regular";

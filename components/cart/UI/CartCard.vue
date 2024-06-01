@@ -11,7 +11,7 @@
       <figcaption>
         <h1>{{ product.type }} {{ product.name }}</h1>
         <p>{{ product.info }}</p>
-        <span>Артикул: {{ product.article }}</span>
+        <span>{{ 'Артикул:  ' + product.article }}</span>
       </figcaption>
     </figure>
 
@@ -22,17 +22,19 @@
         @minus="
           product.count > 1
           ? product.count -= 1
-          : cartStore.deleteProduct(product)
+          : deleteProduct(product)
         "
       />
-      <span v-show="product.count > 1">{{ product.targetPrice.toString().replaceAll('.', ' ') }}₽/шт.</span>
+      <span v-show="product.count > 1">
+        {{ fixedPrice(product.targetPrice) + ' ₽/шт.' }}
+      </span>
     </div>
 
     <div class="cart-card__price">
-      {{ price.toString().replaceAll('.', ' ') + ' ₽'}}
+      {{ price + ' ₽' }}
     </div>
 
-    <button class="close-card" @click="cartStore.deleteProduct(product)">&#x2715</button>
+    <button class="close-card" @click="deleteProduct(product)">&#x2715</button>
   </div>
 </template>
 
@@ -43,15 +45,17 @@ import { useCartStore } from '~/store/cart';
 
 import CountBtns from './buttons/CountBtns.vue';
 
+import fixedPrice from '../functions/fixedPrice';
+
 import type CartProduct from '../types/cart-product.interface';
 
 const props = defineProps<{
   product: CartProduct
 }>();
 
-const cartStore = useCartStore()
+const deleteProduct = useCartStore().deleteProduct
 
-const price = computed(() => props.product.targetPrice * props.product.count)
+const price = computed(() => fixedPrice(props.product.targetPrice * props.product.count))
 </script>
 
 <style scoped lang="scss">

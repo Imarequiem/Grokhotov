@@ -63,7 +63,7 @@ import { useProductsStore } from '~/store/products';
 
 import CarouselCard from './CarouselCard.vue';
 
-const products = useProductsStore().products
+const { products } = useProductsStore()
 const currentSlide: Ref<number> = ref(1)
 const allSlides: number = 6
 </script>

@@ -15,16 +15,14 @@
 
     <div class="card__footer">
       <h2 class="price">
-        {{ product.price?.ru.min.toString().replaceAll('.', ' ') }}
+        {{ product.price?.ru.min.toString().replaceAll('.', ' ') + ' ₽'}}
         -
-        {{ product.price?.ru.max.toString().replaceAll('.', ' ') }}
-        ₽
+        {{ product.price?.ru.max.toString().replaceAll('.', ' ') + ' ₽'}}
       </h2>
       <span class="price">
-        {{ product.price?.eu.min }}
+        {{ product.price?.eu.min + ' €'}}
         -
-        {{ product.price?.eu.max }}
-        €
+        {{ product.price?.eu.max + ' €'}}
       </span>
       <more-btn class="more-btn"/>
     </div>

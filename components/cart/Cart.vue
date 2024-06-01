@@ -4,12 +4,14 @@
       <div class="cart__header">
         <div class="cart__header__info">
           <h1 class="cart__header__info-h1">Ваша корзина</h1>
-          <span class="cart__header__info__item-cart-count">{{ count }} товара</span>
+          <span class="cart__header__info__item-cart-count">
+            {{ count + ' товара' }}
+          </span>
         </div>
 
         <button
           class="clear-cart"
-          @click="cartItems.products.splice(0, cartItems.products.length)"
+          @click="products.splice(0, products.length)"
         >
           Очистить корзину
         </button>
@@ -17,7 +19,7 @@
 
       <div class="cart__items">
         <div
-          v-for="(product, index) in cartItems.products"
+          v-for="(product, index) in products"
           class="cart__items__item"
           :key="index"
          >
@@ -29,7 +31,7 @@
       </div>
 
       <installation
-        v-if="cartItems.products.length > 0"
+        v-if="products.length > 0"
         v-model="cartItems.installation"
       />
     </div>
@@ -57,10 +59,9 @@ import type { Cart } from './types/cart.interface';
 const cartStore = useCartStore()
 
 const cartItems:Ref<Cart> = ref(cartStore.cart)
+const { products } = cartItems.value
 
-const count = computed(() => {
-  return cartStore.getCountProduct()
-})
+const count = computed(() => cartStore.getCountProduct())
 </script>
 
 <style scoped lang="scss">

@@ -1,9 +1,9 @@
 <template>
-  <button class="more">Подробнее</button>
+  <button class="more-btn">Подробнее</button>
 </template>
 
 <style scoped lang="scss">
-.more {
+.more-btn {
   width: 255px;
   height: 52px;
   padding: 15px 50px 15px 50px;

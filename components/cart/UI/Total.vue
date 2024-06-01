@@ -6,7 +6,7 @@
       <p class="total-info-price">
         Сумма заказа
         <span>
-          {{ totalPrice }} ₽
+          {{ totalPrice + ' ₽' }}
         </span>
       </p>
 
@@ -30,7 +30,7 @@
       <p class="total__total-price__p">
         Стоимость товаров
         <span>
-          {{ totalPrice }} ₽
+          {{ totalPrice + ' ₽' }}
         </span>
       </p>
     </div>
