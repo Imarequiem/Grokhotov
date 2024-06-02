@@ -2,10 +2,10 @@
   <div class="cart">
     <div>
       <div class="cart__header">
-        <div class="cart__header__info">
-          <h1 class="cart__header__info-h1">Ваша корзина</h1>
-          <span class="cart__header__info__item-cart-count">
-            {{ count + ' товара' }}
+        <div class="cart__info">
+          <h1 class="cart__info-h1">Ваша корзина</h1>
+          <span class="cart__item-count">
+            {{ cartStore.getCountProduct() + ' товара' }}
           </span>
         </div>
 
@@ -35,9 +35,8 @@
         v-model="cartItems.installation"
       />
     </div>
-    <div>
-      <total />
-    </div>
+
+    <total />
   </div>
 </template>
 
@@ -60,8 +59,6 @@ const cartStore = useCartStore()
 
 const cartItems:Ref<Cart> = ref(cartStore.cart)
 const { products } = cartItems.value
-
-const count = computed(() => cartStore.getCountProduct())
 </script>
 
 <style scoped lang="scss">
@@ -73,7 +70,7 @@ const count = computed(() => cartStore.getCountProduct())
   align-items: center;
 }
 .cart__header,
-.cart__header__info {
+.cart__info {
   display: flex;
   align-items: baseline;
 }
@@ -83,13 +80,13 @@ const count = computed(() => cartStore.getCountProduct())
   width: 800px;
   margin-bottom: 50px;
 
-  .cart__header__info-h1 {
+  .cart__info-h1 {
     font-size: 44px;
     font-weight: 700;
     margin-right: 22px;
     line-height: 53px;
   }
-  .cart__header__info__item-cart-count {
+  .cart__item-count {
     color: var(--secondary-grey);
     font-size: 18px;
     font-weight: 400;

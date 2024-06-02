@@ -26,7 +26,7 @@
         "
       />
       <span v-show="product.count > 1">
-        {{ fixedPrice(product.targetPrice) + ' ₽/шт.' }}
+        {{ CartService.fixPrice(product.targetPrice) + ' ₽/шт.' }}
       </span>
     </div>
 
@@ -42,10 +42,9 @@
 import { computed } from 'vue';
 
 import { useCartStore } from '~/store/cart';
+import { CartService } from '../classes/cart.service';
 
 import CountBtns from '../ui/buttons/CountBtns.vue';
-
-import fixedPrice from '../functions/fixedPrice';
 
 import type CartProduct from '../types/cart-product.interface';
 
@@ -55,7 +54,7 @@ const props = defineProps<{
 
 const deleteProduct = useCartStore().deleteProduct
 
-const price = computed(() => fixedPrice(props.product.targetPrice * props.product.count))
+const price = computed(() => CartService.fixPrice(props.product.targetPrice * props.product.count))
 </script>
 
 <style scoped lang="scss">

@@ -11,7 +11,7 @@
       <div class="header__cart-icon__info">
         <h2>Ваша корзина</h2>
         <span>{{ count + ' товара'}}</span>
-        <p>{{ cartStore.getTotalPrice() + ' ₽'}}</p>
+        <p>{{ CartService.fixPrice(cartStore.getTotalPrice()) + ' ₽'}}</p>
       </div>
     </div>
   </header>
@@ -23,6 +23,7 @@ defineOptions({
 })
 
 import { useCartStore } from '~/store/cart';
+import { CartService } from '../cart/classes/cart.service';
 
 const cartStore = useCartStore()
 

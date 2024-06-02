@@ -1,6 +1,6 @@
-import { defineStore } from "pinia"
+import { defineStore } from "pinia";
 
-import type Product from "~/components/cart/types/product.interface"
+import type Product from "~/components/cart/types/product.interface";
 
 export const useProductsStore = defineStore('products', () => {
   const products: Array<Product> = [
@@ -80,6 +80,7 @@ export const useProductsStore = defineStore('products', () => {
       },
       img: "TDA",
     },
-  ]
-  return { products }
+  ];
+
+  return { products };
 })

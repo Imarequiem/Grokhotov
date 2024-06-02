@@ -1,22 +1,22 @@
 <template>
   <div class="total">
-    <h1 class="total-h1">Итого</h1>
+    <h1 class="total__title">Итого</h1>
 
     <div class="total__info">
-      <p class="total-info-price">
+      <p class="total__price">
         Сумма заказа
         <span>
           {{ totalPrice + ' ₽' }}
         </span>
       </p>
 
-      <p class="total-info-count">
+      <p class="total__count">
         Количество
         <span>
           {{ count }}
         </span>
       </p>
-      <p class="total-info-installation">
+      <p class="total__installation">
         Установка
         <span>
           {{ installation }}
@@ -26,8 +26,8 @@
 
     <hr />
 
-    <div class="total__total-price">
-      <p class="total__total-price__p">
+    <div class="total__price">
+      <p class="total__price-p">
         Стоимость товаров
         <span>
           {{ totalPrice + ' ₽' }}
@@ -36,14 +36,8 @@
     </div>
 
     <div class="total__actions">
-      <order-btn
-        class="order-btn"
-        @click="cartStore.buyToServer()"
-      />
-      <one-click-btn
-        class="one-ckick-btn"
-        @click="cartStore.buyToServer()"
-      />
+      <order-btn class="order-btn" @click="pay" />
+      <one-click-btn class="one-ckick-btn" @click="pay" />
     </div>
   </div>
 </template>
@@ -51,19 +45,27 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import OrderBtn from './buttons/OrderBtn.vue';
+import OneClickBtn from './buttons/OneClickBtn.vue';
+
+import { CartService } from '../classes/cart.service';
+
 import { useCartStore } from '~/store/cart';
 
-import OrderBtn from '../ui/buttons/OrderBtn.vue';
-import OneClickBtn from '../ui/buttons/OneClickBtn.vue';
+const cartStore = useCartStore();
 
-const cartStore = useCartStore()
-const cart = cartStore.cart
+const totalPrice = computed(() => CartService.fixPrice(cartStore.getTotalPrice()));
+const count = computed(() => cartStore.getCountProduct());
 
-const totalPrice = computed(() => cartStore.getTotalPrice())
-const count = computed(() => cartStore.getCountProduct())
 const installation = computed(() => {
-  return cart.installation === true && cart.products.length ? "Да" : "Нет"
-})
+  return cartStore.cart.installation && cartStore.cart.products.length ? "Да" : "Нет"
+});
+
+const pay = (): void => {
+  CartService.pay().toServer(cartStore.cart).then((data): void => {
+    data.context.redirectToSuccessOrderPage();
+  });
+}
 </script>
 
 <style scoped lang="scss">
@@ -78,7 +80,7 @@ const installation = computed(() => {
   background-color: var(--background-grey);
   font-family: "Lato-regular";
 
-  .total-h1 {
+  .total__title {
     font-family: "Lato-bold";
     font-size: 24px;
     font-weight: 600;
@@ -94,9 +96,9 @@ const installation = computed(() => {
   flex-direction: column;
   justify-content: center;
 
-  .total-info-price,
-  .total-info-count,
-  .total-info-installation {
+  .total__price,
+  .total__count,
+  .total__installation {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
@@ -114,8 +116,8 @@ const installation = computed(() => {
   }
 }
 
-.total__total-price {
-  .total__total-price__p {
+.total__price {
+  .total__price-p {
     display: flex;
     justify-content: space-between;
     align-items: center;

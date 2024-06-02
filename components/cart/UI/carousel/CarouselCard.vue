@@ -8,18 +8,18 @@
         width="245"
       >
       <figcaption>
-        <h1 class="product-name">{{ product.name }}</h1>
-        <p class="product-description">{{ product.description }}</p>
+        <h1 class="card__name">{{ product.name }}</h1>
+        <p class="card__description">{{ product.description }}</p>
       </figcaption>
     </figure>
 
     <div class="card__footer">
-      <h2 class="price">
+      <h2 class="card__price">
         {{ product.price?.ru.min.toString().replaceAll('.', ' ') + ' ₽'}}
         -
         {{ product.price?.ru.max.toString().replaceAll('.', ' ') + ' ₽'}}
       </h2>
-      <span class="price">
+      <span class="card__price">
         {{ product.price?.eu.min + ' €'}}
         -
         {{ product.price?.eu.max + ' €'}}
@@ -35,7 +35,7 @@ import MoreBtn from '../buttons/MoreBtn.vue';
 import type Product from '../../types/product.interface';
 
 defineProps<{
-  product: Product
+  product: Product,
 }>()
 </script>
 
@@ -55,7 +55,7 @@ defineProps<{
 }
 
 figcaption {
-  h1.product-name {
+  h1.card__name {
     font-family: "Lato-bold";
     font-size: 22px;
     font-weight: 700;
@@ -63,7 +63,7 @@ figcaption {
     color: var(--primary);
     margin: 5px 0 20px 0;
   }
-  p.product-description {
+  p.card__description {
     font-family: "Lato-regular";
     font-size: 14px;
     line-height: 20.3px;
@@ -72,7 +72,7 @@ figcaption {
 }
 
 .card__footer {
-  h2.price {
+  h2.card__price {
     font-family: "Roboto-medium";
     font-weight: 500;
     font-size: 22px;
@@ -80,7 +80,7 @@ figcaption {
     letter-spacing: 0.005em;
     color: var(--primary);
   }
-  span.price {
+  span.card__price {
     font-family: "Lato-regular";
     font-size: 16px;
     font-weight: 400;

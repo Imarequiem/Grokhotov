@@ -7,11 +7,11 @@
       v-model="installation"
       @click="installation = !installation"
     />
-    <img src="~/assets/img/installation-icon.svg" class="installation-icon"/>
+    <img src="~/assets/img/installation-icon.svg" class="installation__icon"/>
 
     <div class="installation__description">
-      <h1 class="installation__description__h1">Установка</h1>
-      <span class="installation__description__span">
+      <h1 class="installation__h1">Установка</h1>
+      <span class="installation__span">
         Отметьте, если Вам необходима консультация профессионала по монтажу выбранных товаров.
       </span>
     </div>
@@ -37,24 +37,23 @@ const installation = defineModel()
     width: 20px;
     height: 20px;
     margin-right: 15px;
-
-    &__description {
-      display: flex;
-      flex-direction: column;
-    }
   }
-  .installation-icon {
+  &__description {
+    display: flex;
+    flex-direction: column;
+  }
+  .installation__icon {
     margin-right: 20px;
   }
 
-  .installation__description__h1 {
+  .installation__h1 {
     font-family: 'Lato-bold';
     font-size: 16px;
     line-height: 23.2px;
     color: var(--primary);
   }
-  .installation__description__span {
-    font-family: Lato;
+  .installation__span {
+    font-family: 'Lato-regular';
     font-size: 14px;
     line-height: 21px;
     color: var(--secondary-grey);

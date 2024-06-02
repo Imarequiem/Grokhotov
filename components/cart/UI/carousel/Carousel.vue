@@ -3,13 +3,13 @@
     <div class="carousel__header">
       <h1 class="carousel__header-h1">Просмотренные товары</h1>
 
-      <div class="carousel__header__actions">
+      <div class="carousel__actions">
         <button
           class="swiper-button-prev"
           @click="currentSlide -= 1"
         >
         </button>
-        <span class="carousel__actions__slide-info">
+        <span class="carousel__slide-info">
           <strong>
             {{ currentSlide }}
           </strong>
@@ -35,14 +35,14 @@
       <swiper-slide
         v-for="slide in allSlides"
         :key="slide"
-        class="carousel__wrapper__slide"
+        class="carousel__slide"
       >
         <template
           v-for="product in products"
           :key="product.name"
         >
           <carousel-card
-            class="product-card"
+            class="carousel__product-card"
             :product="product"
           />
         </template>
@@ -59,11 +59,14 @@ defineOptions({
 
 import { ref, type Ref } from 'vue';
 
-import { useProductsStore } from '~/store/products';
-
 import CarouselCard from './CarouselCard.vue';
 
-const { products } = useProductsStore()
+import type Product from '../../types/product.interface';
+
+defineProps<{
+  products: Array<Product>,
+}>();
+
 const currentSlide: Ref<number> = ref(1)
 const allSlides: number = 6
 </script>
@@ -97,7 +100,7 @@ const allSlides: number = 6
   transform: rotate(180deg);
 }
 .carousel__header,
-.carousel__wrapper__slide{
+.carousel__slide{
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -110,11 +113,11 @@ const allSlides: number = 6
 .carousel__wrapper {
   margin-top: 60px;
 }
-.carousel__header__actions {
+.carousel__actions {
   display: flex;
   align-items: center;
 
-  .carousel__actions__slide-info {
+  .carousel__slide-info {
     font-family: "Latto-regular";
     font-size: 24px;
     font-weight: 400;

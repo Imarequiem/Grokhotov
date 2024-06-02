@@ -1,14 +1,9 @@
-import { defineStore } from "pinia"
+import { defineStore } from "pinia";
 
-import fixedPrice from "~/components/cart/functions/fixedPrice"
-
-import type { Cart } from "~/components/cart/types/cart.interface"
-import type CartProduct from "~/components/cart/types/cart-product.interface"
+import type { Cart } from "~/components/cart/types/cart.interface";
+import type CartProduct from "~/components/cart/types/cart-product.interface";
 
 export const useCartStore = defineStore('cart', () => {
-  const router = useRouter()
-
-  const url = "grokhotov.com"
   const cart: Cart = reactive({
     products: [
       {
@@ -43,24 +38,20 @@ export const useCartStore = defineStore('cart', () => {
       },
     ],
     installation: false,
-  })
+  });
 
   const getTotalPrice = () => {
-    if(!cart.products.length) {
-      return 0
-    }
-
-    let total = 0
-
-    cart.products.forEach((product: CartProduct) => total += product.targetPrice * product.count)
-    return fixedPrice(total)
+    return cart.products.reduce((total: number, product: CartProduct): number => {
+      total += product.targetPrice * product.count;
+      return total;
+    }, 0);
   }
 
   const getCountProduct = () => {
-    let total = 0
-
-    cart.products.forEach((product: CartProduct) => total += product.count)
-    return total
+    return cart.products.reduce((total: number, product: CartProduct): number => {
+      total += product.count;
+      return total;
+    }, 0);
   }
 
   const deleteProduct = (product: CartProduct) => {
@@ -68,22 +59,5 @@ export const useCartStore = defineStore('cart', () => {
     cart.products.splice(index, 1)
   }
 
-  const buyToServer = async () => {
-    if(!cart.products.length) {
-      return alert('Чтобы что-нибудь купить, заполните корзину')
-    }
-
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(cart),
-    })
-
-    if(!response.ok) {
-      throw new Error(`Ошибка по адресу ${url}, статус ошибки: ${JSON.stringify(response)}`)
-    }
-
-    router.push({ path: "/success-order" })
-  }
-
-  return { cart, getTotalPrice, getCountProduct, deleteProduct, buyToServer }
+  return { cart, getTotalPrice, getCountProduct, deleteProduct }
 })
