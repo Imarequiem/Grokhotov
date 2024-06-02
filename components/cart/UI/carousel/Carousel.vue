@@ -31,6 +31,7 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       }"
+      :allowTouchMove="false"
     >
       <swiper-slide
         v-for="slide in allSlides"
