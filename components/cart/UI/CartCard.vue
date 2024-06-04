@@ -42,9 +42,10 @@
 import { computed } from 'vue';
 
 import { useCartStore } from '~/store/cart';
-import { CartService } from '../classes/cart.service';
 
-import CountBtns from '../ui/buttons/CountBtns.vue';
+import { CartService } from '~/components/cart/classes/cart.service';
+
+import CountBtns from '~/components/cart/ui/buttons/CountBtns.vue';
 
 import type CartProduct from '../types/cart-product.interface';
 

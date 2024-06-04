@@ -10,7 +10,7 @@
 
       <div class="header__cart-icon__info">
         <h2>Ваша корзина</h2>
-        <span>{{ count + ' товара'}}</span>
+        <span>{{ count + ' ' + declension}}</span>
         <p>{{ CartService.fixPrice(cartStore.getTotalPrice()) + ' ₽'}}</p>
       </div>
     </div>
@@ -28,6 +28,7 @@ import { CartService } from '../cart/classes/cart.service';
 const cartStore = useCartStore()
 
 const count = computed(() => cartStore.getCountProduct())
+const declension = computed(() => CartService.normalizeCountForm(count.value, ["товар", "товара", "товаров"]))
 </script>
 
 <style scoped lang="scss">
@@ -39,6 +40,9 @@ header,
 header {
   justify-content: space-between;
   padding: 15px 82px;
+  width: 100%;
+  max-width: 1700px;
+  min-width: 1600px;
 }
 h1 {
   display: block;

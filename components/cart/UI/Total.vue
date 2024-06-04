@@ -28,7 +28,9 @@
 
     <div class="total__price">
       <p class="total__price-p">
-        Стоимость товаров
+        Стоимость
+        <template v-if="count === 1">товара</template>
+        <template v-else>товаров</template>
         <span>
           {{ totalPrice + ' ₽' }}
         </span>
@@ -45,12 +47,12 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import OrderBtn from './buttons/OrderBtn.vue';
-import OneClickBtn from './buttons/OneClickBtn.vue';
-
-import { CartService } from '../classes/cart.service';
+import OrderBtn from '~/components/cart/ui/buttons/OrderBtn.vue';
+import OneClickBtn from '~/components/cart/ui/buttons/OneClickBtn.vue';
 
 import { useCartStore } from '~/store/cart';
+
+import { CartService } from '~/components/cart/classes/cart.service';
 
 const cartStore = useCartStore();
 
@@ -63,7 +65,8 @@ const installation = computed(() => {
 
 const pay = (): void => {
   CartService.pay().toServer(cartStore.cart).then((data): void => {
-    data.context.redirectToSuccessOrderPage();
+    console.log(data)
+    data?.context.redirectToSuccessOrderPage();
   });
 }
 </script>

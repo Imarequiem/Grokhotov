@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import MoreBtn from '../buttons/MoreBtn.vue';
+import MoreBtn from '~/components/cart/ui/buttons/MoreBtn.vue';
 
 import type Product from '../../types/product.interface';
 

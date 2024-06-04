@@ -60,7 +60,7 @@ defineOptions({
 
 import { ref, type Ref } from 'vue';
 
-import CarouselCard from './CarouselCard.vue';
+import CarouselCard from '~/components/cart/ui/carousel/CarouselCard.vue';
 
 import type Product from '../../types/product.interface';
 
@@ -73,6 +73,9 @@ const allSlides: number = 6
 </script>
 
 <style scoped lang="scss">
+.carousel {
+  max-width: 1700px;
+}
 .swiper-button-next,
 .swiper-button-prev {
   position: unset;

@@ -10,14 +10,18 @@ class CartService {
       },
 
       toServer: async (cart: Cart) => {
-        const response = await fetch('grokhotov.com', {
-          method: "POST",
-          body: JSON.stringify(cart),
+        if(!cart.products.length) return alert("Заполните корзину прежде, чем что-то купить")
+        const response = await new Promise((resolve) => {
+          setTimeout(() => {
+            if(cart.products.length) {
+              resolve({
+                status: true
+              });
+            }
+          }, 1500);
         });
 
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${JSON.stringify(response)}`);
-        }
+
 
         return { response, context: CartService.pay() };
       }
@@ -31,6 +35,14 @@ class CartService {
     }
 
     return price.replaceAll('.', ' ');
+  }
+
+  public static normalizeCountForm = (int: number, array: Array<string>): string => {
+    return (array = array || ['товар', 'товара', 'товаров']) && array [
+        (int % 100 > 4 && int % 100 < 20)
+        ? 2
+        : [2, 0, 1, 1, 1, 2][(int % 10 < 5) ? int % 10 : 5]
+      ];
   }
 }
 

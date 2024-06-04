@@ -5,7 +5,7 @@
         <div class="cart__info">
           <h1 class="cart__info-h1">Ваша корзина</h1>
           <span class="cart__item-count">
-            {{ cartStore.getCountProduct() + ' товара' }}
+            {{ count + ' ' + declension }}
           </span>
         </div>
 
@@ -49,13 +49,18 @@ import { ref, type Ref } from 'vue';
 
 import { useCartStore } from '~/store/cart';
 
-import Total from './ui/Total.vue';
-import Installation from './ui/Installation.vue';
-import CartCard from './ui/CartCard.vue';
+import { CartService } from '~/components/cart/classes/cart.service';
+
+import Total from '~/components/cart/ui/Total.vue';
+import Installation from '~/components/cart/ui/Installation.vue';
+import CartCard from '~/components/cart/ui/CartCard.vue';
 
 import type { Cart } from './types/cart.interface';
 
 const cartStore = useCartStore()
+
+const count = computed(() => cartStore.getCountProduct())
+const declension = computed(() => CartService.normalizeCountForm(count.value, ["товар", "товара", "товаров"]))
 
 const cartItems:Ref<Cart> = ref(cartStore.cart)
 const { products } = cartItems.value
